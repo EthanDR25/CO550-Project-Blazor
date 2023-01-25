@@ -1,0 +1,13 @@
+﻿
+
+@foreach(FilmBooking booking in Bookings)
+{
+	<FilmBookingView Booking="@booking"></FilmBookingView>
+}
+
+@code {
+	[EditorRequired]
+	[Parameter]
+	public List<FilmBooking> Bookings { get; set; } = TicketBookingService.SelectedItems.ToList();
+}
+

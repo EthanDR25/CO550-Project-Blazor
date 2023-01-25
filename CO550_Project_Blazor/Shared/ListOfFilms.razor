@@ -1,0 +1,46 @@
+﻿@inject TicketBookingService TicketBookingService
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Web;
+
+@foreach(Film film in Films)
+{
+	<div class="card w-50">
+	
+	<div class="card-body">
+
+	<h5 class="card-title">@film.Title</h5>
+	<p class="card-text">Release Date: @film.ReleaseDate</p>
+	<p class="card-text">Rating: @film.Rating</p>
+	<p class="card-text">Runtime: @film.Runtime</p>
+	<p class="card-text">Director: @film.Director</p>
+	<p class="card-text">Genre: @film.Genre</p>
+	<p class="card-text">£@film.Price</p>
+	<img src="Images/@film.ImageURL" style="width: 228px; height: 281px; top:21px; position: absolute; left: 257px;" />
+	
+	@if (DisplayTicketBuyingButton)
+	{
+	  <button href="#" class="btn btn-primary" type="button" @onclick="()=> BookTicket(film.FilmID)">Book</button>
+	}
+
+	</div>
+	</div><br>
+
+}
+@*Code Section*@
+@code {
+	[EditorRequired]
+	[Parameter]
+	public List<Film> Films { get; set; } = FilmService.Films.ToList();
+
+	[Parameter]
+	public bool DisplayTicketBuyingButton { get; set; } = true;
+
+	public void BookTicket(int filmID)
+	{
+		TicketBookingService.BookTicket(filmID);
+	}
+
+}

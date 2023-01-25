@@ -1,0 +1,20 @@
+﻿@using CO550_Project_Blazor.Models
+
+@{
+    Payment payment = new Payment();
+}
+
+<div asp-validation-summary="All"></div>
+
+<form method="POST" runat="server">
+    <div class="mb-3">
+        <input type="text" asp-for="payment.CardName">
+    </div>
+    <button type="submit">Submit</button>
+</form>
+
+<div>@this.Model.CardName</div>
+<div>@this.Model.CardNumber</div>
+<div>@this.Model.SecurityNumber</div>
+<div>@this.Model.BookingDate</div>
+<div>@this.Model.ExpiryDate</div>
